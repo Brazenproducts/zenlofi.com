@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Zen Lofi — our mission to help people focus and find calm." />
+  <title>About — Zen Lofi</title>
+  <style>
+    :root {
+      --bg: #1a1a2e; --bg2: #16213e; --accent: #7c6af7; --accent2: #5eead4;
+      --glow: rgba(124,106,247,0.35); --text: #e2e8f0; --muted: #94a3b8;
+      --card: rgba(255,255,255,0.05); --card-border: rgba(255,255,255,0.08);
+      --gold: #f59e0b; --kofi: #ff5e5b;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(2px 2px at 45% 10%, rgba(124,106,247,0.4) 0%, transparent 100%),
+        radial-gradient(2px 2px at 85% 80%, rgba(94,234,212,0.3) 0%, transparent 100%);
+      pointer-events: none; z-index: 0;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(26,26,46,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0 2rem; height: 60px;
+      display: flex; align-items: center; gap: 2rem;
+    }
+    .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--accent); text-decoration: none; text-shadow: 0 0 12px var(--glow); margin-right: auto; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    nav a:hover { color: var(--text); }
+    .nav-cheer { background: linear-gradient(135deg, #f59e0b, #f97316); color: #fff !important; padding: 0.35rem 0.85rem; border-radius: 999px; font-size: 0.82rem; font-weight: 600; }
+    .page-wrap { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
+    h1 { font-size: 2.2rem; font-weight: 800; background: linear-gradient(135deg, #a78bfa, #5eead4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1.5rem; }
+    h2 { font-size: 1.3rem; font-weight: 700; color: var(--accent2); margin: 2.5rem 0 1rem; }
+    p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-size: 1rem; }
+    a { color: var(--accent); }
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,106,247,0.1), rgba(94,234,212,0.06));
+      border: 1px solid rgba(124,106,247,0.25);
+      border-radius: 14px;
+      padding: 1.75rem 2rem;
+      margin: 2rem 0;
+    }
+    .highlight-box p { color: var(--text); font-size: 1.05rem; }
+    footer { background: rgba(15,52,96,0.4); border-top: 1px solid var(--card-border); padding: 2rem 1.25rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+    footer .footer-links { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.75rem; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+    .footer-copy { color: rgba(148,163,184,0.55); font-size: 0.78rem; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">🎵 Zen Lofi</a>
+  <a href="/">Home</a>
+  <a href="/focus-timer.html">Focus Timer</a>
+  <a href="/about.html">About</a>
+  <a href="https://thedailycheer.com" target="_blank" rel="noopener" class="nav-cheer">🌟 The Daily Cheer</a>
+</nav>
+
+<div class="page-wrap">
+  <h1>About Zen Lofi</h1>
+
+  <div class="highlight-box">
+    <p>Zen Lofi exists for one reason: to give you a quiet corner of the internet where you can actually get things done — or just breathe for a minute.</p>
+  </div>
+
+  <p>We live in a world that constantly demands our attention. Every app, every notification, every tab is fighting for a piece of you. Zen Lofi is the opposite of that. It's a place you come to <em>subtract</em> noise, not add it.</p>
+
+  <h2>🎵 What We Built</h2>
+  <p>Zen Lofi combines three things that help people focus: lo-fi music streams, layerable ambient sounds (rain, fire, café, ocean — mix them however you like), and a simple Pomodoro focus timer. No accounts. No tracking. No nonsense. Free forever.</p>
+
+  <h2>🌱 The Philosophy</h2>
+  <p>The best productivity tools get out of your way. You shouldn't need a tutorial to use a timer or play rain sounds. Everything on Zen Lofi is designed to be picked up in seconds and forgotten about — in the good way — while you do the actual work.</p>
+
+  <h2>🌟 The Daily Cheer</h2>
+  <p>We're big fans of <a href="https://thedailycheer.com" target="_blank" rel="noopener">The Daily Cheer</a> — a simple dose of positivity to start your day. If Zen Lofi helps you find focus, The Daily Cheer helps you find the right mindset to use it. They go together well.</p>
+
+  <h2>☕ Keep the Lights On</h2>
+  <p>Zen Lofi is free and always will be. If it helps you, consider <a href="https://ko-fi.com/zenlofi" target="_blank" rel="noopener">buying us a coffee on Ko-fi</a>. It covers hosting and keeps us motivated to add new sounds and features.</p>
+
+  <h2>📬 Get In Touch</h2>
+  <p>Have a sound you'd love to see added? A bug? Just want to say hi? We'd love to hear from you. Find us on Ko-fi or drop us a message.</p>
+
+  <p style="margin-top:2rem;color:var(--text);font-style:italic;">"Made with ❤️ for people who need a break."</p>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="https://thedailycheer.com" target="_blank" rel="noopener" style="color:#f59e0b;">🌟 The Daily Cheer</a>
+    <a href="https://ko-fi.com/zenlofi" target="_blank" rel="noopener" style="color:#ff5e5b;">☕ Ko-fi</a>
+  </div>
+  <div class="footer-copy">© 2026 Zen Lofi</div>
+</footer>
+
+</body>
+</html>

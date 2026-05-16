@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Privacy Policy — Zen Lofi" />
+  <title>Privacy Policy — Zen Lofi</title>
+  <style>
+    :root {
+      --bg: #1a1a2e; --accent: #7c6af7; --accent2: #5eead4;
+      --glow: rgba(124,106,247,0.35); --text: #e2e8f0; --muted: #94a3b8;
+      --card: rgba(255,255,255,0.05); --card-border: rgba(255,255,255,0.08);
+      --gold: #f59e0b; --kofi: #ff5e5b;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(2px 2px at 75% 70%, rgba(124,106,247,0.3) 0%, transparent 100%);
+      pointer-events: none; z-index: 0;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(26,26,46,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0 2rem; height: 60px;
+      display: flex; align-items: center; gap: 2rem;
+    }
+    .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--accent); text-decoration: none; margin-right: auto; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    nav a:hover { color: var(--text); }
+    .nav-cheer { background: linear-gradient(135deg, #f59e0b, #f97316); color: #fff !important; padding: 0.35rem 0.85rem; border-radius: 999px; font-size: 0.82rem; font-weight: 600; }
+    .page-wrap { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
+    h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #a78bfa, #5eead4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+    .last-updated { color: var(--muted); font-size: 0.85rem; margin-bottom: 2rem; }
+    h2 { font-size: 1.15rem; font-weight: 700; color: var(--accent2); margin: 2.25rem 0 0.75rem; }
+    p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.97rem; }
+    ul { color: var(--muted); line-height: 1.8; margin-left: 1.5rem; margin-bottom: 1rem; font-size: 0.97rem; }
+    li { margin-bottom: 0.4rem; }
+    a { color: var(--accent); }
+    footer { background: rgba(15,52,96,0.4); border-top: 1px solid var(--card-border); padding: 2rem 1.25rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+    footer .footer-links { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.75rem; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+    .footer-copy { color: rgba(148,163,184,0.55); font-size: 0.78rem; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">🎵 Zen Lofi</a>
+  <a href="/">Home</a>
+  <a href="/focus-timer.html">Focus Timer</a>
+  <a href="/about.html">About</a>
+  <a href="https://thedailycheer.com" target="_blank" rel="noopener" class="nav-cheer">🌟 The Daily Cheer</a>
+</nav>
+
+<div class="page-wrap">
+  <h1>Privacy Policy</h1>
+  <p class="last-updated">Last updated: May 2026</p>
+
+  <p>Your privacy matters. Zen Lofi is designed to be a simple, low-footprint tool, and we collect as little data as possible to make it work. Here's exactly what we do — and don't — do.</p>
+
+  <h2>1. Information We Collect</h2>
+  <p>Zen Lofi does not require you to create an account. We do not collect your name, email address, or any personal data by default.</p>
+  <p>The following data is stored <strong>locally in your browser</strong> using localStorage — it never leaves your device:</p>
+  <ul>
+    <li>Stream preferences (likes/dislikes/weights)</li>
+    <li>Premium waitlist email address (if you choose to submit one)</li>
+    <li>Timer settings and preferences</li>
+  </ul>
+
+  <h2>2. Analytics & Cookies</h2>
+  <p>Zen Lofi may use standard web analytics (such as Google Analytics or similar privacy-respecting tools) to understand aggregate traffic — things like which pages are visited and how often. This data is anonymized and never tied to individual identities.</p>
+  <p>Embedded YouTube players may set cookies per Google's own privacy policy. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a> for details.</p>
+
+  <h2>3. Third-Party Services</h2>
+  <p>Zen Lofi uses or links to these third-party services:</p>
+  <ul>
+    <li><strong>YouTube (Google):</strong> Lo-fi stream embeds. Subject to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</li>
+    <li><strong>Ko-fi:</strong> Voluntary donations. Subject to <a href="https://ko-fi.com/privacy" target="_blank" rel="noopener">Ko-fi's Privacy Policy</a>.</li>
+    <li><strong>Google AdSense:</strong> Display advertising (when enabled). Subject to Google's advertising privacy policy.</li>
+    <li><strong>Amazon Associates:</strong> Affiliate links in "Zen Lofi Picks." We may earn a commission if you purchase through these links at no extra cost to you.</li>
+    <li><strong>SoundJay:</strong> Ambient audio files. We link directly to their CDN.</li>
+  </ul>
+
+  <h2>4. Advertising</h2>
+  <p>Zen Lofi may display advertisements via Google AdSense. These ads may use cookies and interest-based targeting per Google's advertising policies. You can opt out of personalized ads at <a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a>.</p>
+
+  <h2>5. Affiliate Links</h2>
+  <p>Some links on this site, particularly in the "Zen Lofi Picks" section, are Amazon affiliate links. We earn a small commission when you purchase through them. This has no effect on the price you pay and helps keep Zen Lofi free.</p>
+
+  <h2>6. Children's Privacy</h2>
+  <p>Zen Lofi is not directed at children under 13 and does not knowingly collect any information from children.</p>
+
+  <h2>7. Changes to This Policy</h2>
+  <p>We may update this privacy policy from time to time. Any changes will be reflected on this page with an updated date. We encourage you to review it periodically.</p>
+
+  <h2>8. Contact</h2>
+  <p>Questions about this privacy policy? Reach us through <a href="https://ko-fi.com/zenlofi" target="_blank" rel="noopener">our Ko-fi page</a>.</p>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="https://thedailycheer.com" target="_blank" rel="noopener" style="color:#f59e0b;">🌟 The Daily Cheer</a>
+    <a href="https://ko-fi.com/zenlofi" target="_blank" rel="noopener" style="color:#ff5e5b;">☕ Ko-fi</a>
+  </div>
+  <div class="footer-copy">© 2026 Zen Lofi</div>
+</footer>
+
+</body>
+</html>
