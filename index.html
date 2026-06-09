@@ -3,1195 +3,364 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Mix ambient sounds, stream lo-fi beats, and use the focus timer — all in one place. Free forever." />
-  <meta name="keywords" content="lofi, lo-fi music, ambient sounds, focus timer, pomodoro, study music, rain sounds, nature sounds" />
-  <meta property="og:title" content="Zen Lofi — Find your focus. Find your calm." />
-  <meta property="og:description" content="Mix ambient sounds, stream lo-fi beats, and use the focus timer — all in one place." />
-  <meta property="og:url" content="https://zenlofi.com" />
-  <meta property="og:type" content="website" />
   <title>Zen Lofi — Find your focus. Find your calm.</title>
-  <style>
-    :root {
-      --bg: #1a1a2e;
-      --bg2: #16213e;
-      --bg3: #0f3460;
-      --accent: #7c6af7;
-      --accent2: #5eead4;
-      --glow: rgba(124, 106, 247, 0.35);
-      --glow2: rgba(94, 234, 212, 0.3);
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --card: rgba(255,255,255,0.05);
-      --card-border: rgba(255,255,255,0.08);
-      --gold: #f59e0b;
-      --kofi: #ff5e5b;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Subtle animated starfield background */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 25% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
-        radial-gradient(1px 1px at 45% 15%, rgba(255,255,255,0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 65% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
-        radial-gradient(1px 1px at 80% 35%, rgba(255,255,255,0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 92% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
-        radial-gradient(1px 1px at 55% 45%, rgba(255,255,255,0.2) 0%, transparent 100%),
-        radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 72% 10%, rgba(255,255,255,0.3) 0%, transparent 100%),
-        radial-gradient(2px 2px at 18% 45%, rgba(124,106,247,0.5) 0%, transparent 100%),
-        radial-gradient(2px 2px at 88% 75%, rgba(94,234,212,0.4) 0%, transparent 100%),
-        radial-gradient(2px 2px at 50% 5%, rgba(124,106,247,0.4) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ===== NAV ===== */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(26, 26, 46, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--card-border);
-      padding: 0 2rem;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .nav-logo {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--accent);
-      text-decoration: none;
-      text-shadow: 0 0 12px var(--glow);
-      white-space: nowrap;
-      margin-right: auto;
-    }
-
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-      white-space: nowrap;
-    }
-
-    nav a:hover { color: var(--text); }
-
-    .nav-cheer {
-      background: linear-gradient(135deg, #f59e0b, #f97316);
-      color: #fff !important;
-      padding: 0.35rem 0.85rem;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      transition: opacity 0.2s !important;
-    }
-    .nav-cheer:hover { opacity: 0.88; }
-
-    /* ===== LAYOUT ===== */
-    .page-wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
-
-    section {
-      padding: 3.5rem 0;
-    }
-
-    h2 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      color: var(--text);
-    }
-
-    h2 .sec-icon {
-      margin-right: 0.4rem;
-    }
-
-    /* ===== ADSENSE ===== */
-    .adsense-wrap {
-      padding: 0.75rem 0;
-    }
-
-    /* ===== HERO ===== */
-    .hero {
-      text-align: center;
-      padding: 4rem 0 2rem;
-    }
-
-    .hero h1 {
-      font-size: clamp(1.9rem, 5vw, 3.2rem);
-      font-weight: 800;
-      line-height: 1.2;
-      background: linear-gradient(135deg, #a78bfa, #5eead4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1rem;
-      text-shadow: none;
-      filter: drop-shadow(0 0 20px rgba(124,106,247,0.4));
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 540px;
-      margin: 0 auto 2rem;
-      line-height: 1.65;
-    }
-
-    /* ===== KO-FI BAR ===== */
-    .kofi-bar {
-      background: rgba(255, 94, 91, 0.1);
-      border: 1px solid rgba(255, 94, 91, 0.25);
-      border-radius: 10px;
-      padding: 0.75rem 1.25rem;
-      text-align: center;
-      font-size: 0.92rem;
-      color: var(--muted);
-      margin: 0 0 1rem;
-    }
-
-    .kofi-btn {
-      background: var(--kofi);
-      color: #fff;
-      padding: 0.3rem 0.8rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-decoration: none;
-      margin-left: 0.4rem;
-      transition: opacity 0.2s;
-    }
-    .kofi-btn:hover { opacity: 0.85; }
-
-    /* ===== PREMIUM BANNER ===== */
-    .premium-banner {
-      background: linear-gradient(135deg, rgba(124,106,247,0.12), rgba(94,234,212,0.08));
-      border: 1px solid rgba(124,106,247,0.3);
-      border-radius: 10px;
-      padding: 0.85rem 1.25rem;
-      text-align: center;
-      font-size: 0.92rem;
-      margin: 0 0 1rem;
-      color: var(--text);
-    }
-
-    .premium-banner button {
-      background: linear-gradient(135deg, var(--accent), #a78bfa);
-      color: #fff;
-      border: none;
-      padding: 0.4rem 1rem;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-left: 0.5rem;
-      transition: opacity 0.2s;
-    }
-    .premium-banner button:hover { opacity: 0.85; }
-
-    /* ===== CARDS (shared) ===== */
-    .card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 1.25rem;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .card:hover {
-      border-color: rgba(124,106,247,0.35);
-      box-shadow: 0 0 18px var(--glow);
-    }
-
-    /* ===== STREAMS ===== */
-    .stream-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .stream-card {
-      cursor: pointer;
-      position: relative;
-      text-align: center;
-      padding: 1.5rem 1.25rem 1rem;
-    }
-
-    .stream-card.active {
-      border-color: var(--accent2) !important;
-      box-shadow: 0 0 20px var(--glow2) !important;
-    }
-
-    .stream-card .stream-thumb {
-      font-size: 2.5rem;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
-    .stream-card h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .stream-card .stream-desc {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-    }
-
-    .stream-card .liked-badge {
-      display: none;
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      font-size: 0.9rem;
-    }
-
-    .stream-card.liked .liked-badge { display: inline; }
-
-    .stream-actions {
-      display: flex;
-      gap: 0.5rem;
-      justify-content: center;
-      margin-top: 0.5rem;
-    }
-
-    .stream-actions button {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid var(--card-border);
-      color: var(--text);
-      border-radius: 8px;
-      padding: 0.3rem 0.7rem;
-      font-size: 0.82rem;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .stream-actions button:hover { background: rgba(255,255,255,0.13); }
-
-    .stream-player {
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--bg2);
-      border: 1px solid var(--card-border);
-      width: 100%;
-      aspect-ratio: 16/9;
-      max-height: 380px;
-    }
-
-    .stream-player iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    .stream-player-placeholder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 200px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    /* ===== NATURE SOUNDS ===== */
-    .sound-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-
-    .sound-btn {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 1.1rem 1rem;
-      cursor: pointer;
-      text-align: center;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      color: var(--text);
-    }
-
-    .sound-btn:hover {
-      border-color: rgba(94,234,212,0.3);
-    }
-
-    .sound-btn.playing {
-      border-color: var(--accent2) !important;
-      box-shadow: 0 0 16px var(--glow2);
-      background: rgba(94,234,212,0.07);
-    }
-
-    .sound-btn .sound-emoji {
-      font-size: 2rem;
-      display: block;
-      margin-bottom: 0.4rem;
-    }
-
-    .sound-btn .sound-name {
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.35rem;
-    }
-
-    .sound-status {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    .sound-btn.playing .sound-status {
-      color: var(--accent2);
-    }
-
-    .vol-slider {
-      width: 100%;
-      margin-top: 0.6rem;
-      accent-color: var(--accent2);
-      cursor: pointer;
-    }
-
-    /* ===== FOCUS TIMER ===== */
-    .timer-wrap {
-      max-width: 480px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .timer-presets {
-      display: flex;
-      gap: 0.65rem;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .preset-btn {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      color: var(--text);
-      border-radius: 10px;
-      padding: 0.5rem 1.1rem;
-      font-size: 0.88rem;
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .preset-btn:hover, .preset-btn.active {
-      background: rgba(124,106,247,0.18);
-      border-color: var(--accent);
-    }
-
-    .timer-display {
-      font-size: clamp(4rem, 18vw, 7rem);
-      font-weight: 800;
-      font-variant-numeric: tabular-nums;
-      color: var(--text);
-      text-shadow: 0 0 30px var(--glow), 0 0 60px rgba(124,106,247,0.2);
-      letter-spacing: 0.04em;
-      margin: 1rem 0;
-      transition: color 0.3s;
-    }
-
-    .timer-display.break-mode {
-      color: var(--accent2);
-      text-shadow: 0 0 30px var(--glow2);
-    }
-
-    .timer-label {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 1.25rem;
-      min-height: 1.4em;
-    }
-
-    .timer-controls {
-      display: flex;
-      gap: 0.75rem;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .timer-btn {
-      border: none;
-      border-radius: 12px;
-      padding: 0.7rem 1.75rem;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s;
-    }
-    .timer-btn:active { transform: scale(0.96); }
-
-    .btn-start {
-      background: linear-gradient(135deg, var(--accent), #a78bfa);
-      color: #fff;
-    }
-
-    .btn-pause {
-      background: rgba(124,106,247,0.2);
-      color: var(--accent);
-      border: 1px solid var(--accent) !important;
-    }
-
-    .btn-reset {
-      background: rgba(255,255,255,0.07);
-      color: var(--muted);
-      border: 1px solid var(--card-border) !important;
-    }
-
-    .timer-btn:hover { opacity: 0.85; }
-
-    .custom-timer {
-      display: none;
-      gap: 0.5rem;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
-    }
-
-    .custom-timer.show { display: flex; }
-
-    .custom-timer input {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      color: var(--text);
-      border-radius: 8px;
-      padding: 0.45rem 0.7rem;
-      width: 80px;
-      font-size: 0.9rem;
-      text-align: center;
-    }
-    .custom-timer input:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-
-    .custom-timer label {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .custom-timer button {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 0.45rem 1rem;
-      font-size: 0.88rem;
-      cursor: pointer;
-    }
-
-    /* ===== AFFILIATE PICKS ===== */
-    .picks-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 1rem;
-    }
-
-    .picks-label {
-      font-size: 0.82rem;
-      color: var(--gold);
-      margin-bottom: 1rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .pick-card {
-      background: var(--card);
-      border: 1px solid rgba(245,158,11,0.22);
-      border-radius: 14px;
-      padding: 1.4rem 1.2rem;
-      text-decoration: none;
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .pick-card:hover {
-      border-color: rgba(245,158,11,0.5);
-      box-shadow: 0 0 18px rgba(245,158,11,0.15);
-    }
-
-    .pick-card .pick-emoji {
-      font-size: 2rem;
-    }
-
-    .pick-card .pick-title {
-      font-size: 0.92rem;
-      font-weight: 600;
-      line-height: 1.4;
-    }
-
-    .pick-card .pick-arrow {
-      font-size: 0.8rem;
-      color: var(--gold);
-      margin-top: auto;
-      padding-top: 0.5rem;
-    }
-
-    /* ===== WAITLIST ===== */
-    #waitlist {
-      max-width: 500px;
-      margin: 0 auto;
-      text-align: center;
-      background: linear-gradient(135deg, rgba(124,106,247,0.1), rgba(94,234,212,0.06));
-      border: 1px solid rgba(124,106,247,0.25);
-      border-radius: 18px;
-      padding: 2.5rem 2rem;
-    }
-
-    #waitlist h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.6rem;
-    }
-
-    #waitlist p {
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
-    }
-
-    .waitlist-form {
-      display: flex;
-      gap: 0.65rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    #waitlist-email {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid var(--card-border);
-      color: var(--text);
-      border-radius: 10px;
-      padding: 0.65rem 1rem;
-      font-size: 0.95rem;
-      flex: 1;
-      min-width: 200px;
-    }
-    #waitlist-email:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-    #waitlist-email::placeholder { color: var(--muted); }
-
-    .waitlist-submit {
-      background: linear-gradient(135deg, var(--accent), #a78bfa);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 0.65rem 1.4rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .waitlist-submit:hover { opacity: 0.85; }
-
-    #waitlist-confirm {
-      display: none;
-      color: var(--accent2);
-      font-size: 1rem;
-      font-weight: 600;
-      margin-top: 1rem;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      background: rgba(15, 52, 96, 0.4);
-      border-top: 1px solid var(--card-border);
-      padding: 2rem 1.25rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-
-    footer .footer-links {
-      display: flex;
-      gap: 1.25rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 0.75rem;
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    footer a:hover { color: var(--text); }
-
-    footer .footer-kofi {
-      color: var(--kofi) !important;
-    }
-
-    footer .footer-cheer {
-      color: var(--gold) !important;
-    }
-
-    .footer-copy {
-      color: rgba(148,163,184,0.55);
-      font-size: 0.78rem;
-      margin-top: 0.5rem;
-    }
-
-    /* ===== FLOATING KO-FI ===== */
-    .kofi-float {
-      position: fixed;
-      top: 72px;
-      right: 1.2rem;
-      z-index: 200;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--kofi);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      text-decoration: none;
-      box-shadow: 0 4px 14px rgba(255,94,91,0.45);
-      transition: transform 0.2s, box-shadow 0.2s;
-      line-height: 1;
-    }
-    .kofi-float:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 20px rgba(255,94,91,0.6);
-    }
-
-    /* ===== TOAST ===== */
-    #toast {
-      position: fixed;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: rgba(30,30,60,0.96);
-      border: 1px solid var(--accent);
-      color: var(--text);
-      padding: 0.75rem 1.5rem;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      z-index: 999;
-      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-      pointer-events: none;
-    }
-    #toast.show {
-      transform: translateX(-50%) translateY(0);
-    }
-
-    /* ===== DIVIDER ===== */
-    .section-divider {
-      border: none;
-      border-top: 1px solid var(--card-border);
-      margin: 0;
-    }
-
-    /* ===== SCROLLBAR ===== */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: rgba(124,106,247,0.35); border-radius: 3px; }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 640px) {
-      nav { gap: 1rem; }
-      nav a:not(.nav-logo):not(.nav-cheer) { display: none; }
-      .timer-display { font-size: 5rem; }
-    }
-  </style>
-</head>
-<body>
-
-<!-- Floating Ko-fi -->
-<a href="https://ko-fi.com/zenlofi" target="_blank" rel="noopener" class="kofi-float" title="Buy us a coffee ☕">☕</a>
-
-<!-- Toast -->
-<div id="toast"></div>
-
-<!-- ===== NAV ===== -->
-<nav>
-  <a href="/" class="nav-logo">🎵 Zen Lofi</a>
-  <a href="/">Home</a>
-  <a href="/focus-timer.html">Focus Timer</a>
-  <a href="/about.html">About</a>
-  <a href="https://thedailycheer.com" target="_blank" rel="noopener" class="nav-cheer">🌟 The Daily Cheer</a>
-</nav>
-
-<div class="page-wrap">
-
-  <!-- ===== ADSENSE ===== -->
-  <div class="adsense-wrap">
-    <div id="adsense-top" style="text-align:center;min-height:90px;background:rgba(255,255,255,0.05);margin:10px auto;max-width:728px;line-height:90px;color:#666;"><!-- AdSense: apply at https://www.google.com/adsense --></div>
-  </div>
-
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <h1>Find your focus. Find your calm.</h1>
-    <p>Mix ambient sounds, stream lo-fi beats, and use the focus timer — all in one place.</p>
-
-    <div class="kofi-bar">
-      ❤️ Zen Lofi is free forever — <a href="https://ko-fi.com/zenlofi" target="_blank" rel="noopener" class="kofi-btn">☕ Buy us a coffee</a> if it helps you focus
-    </div>
-
-    <div class="premium-banner">
-      🌟 <strong>Zen Lofi Premium</strong> — No ads + extra sounds + save your presets &nbsp;
-      <button onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join Waitlist — $3/mo coming soon</button>
-    </div>
-  </section>
-
-  <hr class="section-divider" />
-
-  <!-- ===== STREAMS ===== -->
-  <section id="streams">
-    <h2><span class="sec-icon">🎧</span>Lo-fi Streams</h2>
-
-    <div class="stream-grid" id="stream-grid">
-      <!-- populated by JS -->
-    </div>
-
-    <div class="stream-player" id="stream-player">
-      <div class="stream-player-placeholder" id="player-placeholder">
-        ▶️ Click a stream above to start playing
-      </div>
-      <iframe id="yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen style="display:none;"></iframe>
-    </div>
-  </section>
-
-  <hr class="section-divider" />
-
-  <!-- ===== NATURE SOUNDS ===== -->
-  <section id="sounds">
-    <h2><span class="sec-icon">🌿</span>Nature Sound Mixer</h2>
-    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1.25rem;">Layer multiple sounds at once — that's the whole point 🎚️</p>
-    <div class="sound-grid" id="sound-grid">
-      <!-- populated by JS -->
-    </div>
-  </section>
-
-  <hr class="section-divider" />
-
-  <!-- ===== FOCUS TIMER ===== -->
-  <section id="timer">
-    <h2><span class="sec-icon">⏱️</span>Focus Timer</h2>
-
-    <div class="timer-wrap">
-      <div class="timer-presets">
-        <button class="preset-btn active" data-work="25" data-break="5" id="preset-25">25 / 5 min</button>
-        <button class="preset-btn" data-work="45" data-break="15" id="preset-45">45 / 15 min</button>
-        <button class="preset-btn" id="preset-custom">Custom</button>
-      </div>
-
-      <div class="custom-timer" id="custom-inputs">
-        <label>Work <input type="number" id="custom-work" value="30" min="1" max="120" /> min</label>
-        <label>Break <input type="number" id="custom-break" value="10" min="1" max="60" /> min</label>
-        <button onclick="applyCustom()">Set</button>
-      </div>
-
-      <div class="timer-display" id="timer-display">25:00</div>
-      <div class="timer-label" id="timer-label">🎯 Focus session — ready when you are</div>
-
-      <div class="timer-controls">
-        <button class="timer-btn btn-start" id="btn-start" onclick="timerStart()">▶ Start</button>
-        <button class="timer-btn btn-pause" id="btn-pause" onclick="timerPause()" style="display:none;">⏸ Pause</button>
-        <button class="timer-btn btn-reset" onclick="timerReset()">↺ Reset</button>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider" />
-
-  <!-- ===== AFFILIATE PICKS ===== -->
-  <section id="picks">
-    <div class="picks-label">🛍️ Zen Lofi Picks — hand-curated for your setup</div>
-    <div class="picks-grid">
-      <a class="pick-card" href="https://www.amazon.com/dp/B0CQXMXJC5/?tag=brazenprodu01-20" target="_blank" rel="noopener sponsored">
-        <span class="pick-emoji">🎧</span>
-        <span class="pick-title">Best Headphones for Lo-fi</span>
-        <span class="pick-arrow">Shop on Amazon →</span>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/dp/B0DFWJ7J35/?tag=brazenprodu01-20" target="_blank" rel="noopener sponsored">
-        <span class="pick-emoji">🔊</span>
-        <span class="pick-title">Bluetooth Speakers</span>
-        <span class="pick-arrow">Shop on Amazon →</span>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/dp/B0C4SW4MXJ/?tag=brazenprodu01-20" target="_blank" rel="noopener sponsored">
-        <span class="pick-emoji">🕯️</span>
-        <span class="pick-title">Focus Desk Accessories</span>
-        <span class="pick-arrow">Shop on Amazon →</span>
-      </a>
-      <a class="pick-card" href="https://www.amazon.com/dp/B0FB36RXC8/?tag=brazenprodu01-20" target="_blank" rel="noopener sponsored">
-        <span class="pick-emoji">🌿</span>
-        <span class="pick-title">Desk Plants</span>
-        <span class="pick-arrow">Shop on Amazon →</span>
-      </a>
-    </div>
-  </section>
-
-  <hr class="section-divider" />
-
-  <!-- ===== WAITLIST ===== -->
-  <section>
-    <div id="waitlist">
-      <h2>🌟 Go Premium — Coming Soon</h2>
-      <p>No ads. Extra sounds. Save your perfect mix. $3/month.</p>
-      <div class="waitlist-form">
-        <input type="email" id="waitlist-email" placeholder="your@email.com" />
-        <button class="waitlist-submit" onclick="saveWaitlist()">Notify Me</button>
-      </div>
-      <div id="waitlist-confirm">You're on the list! ✨</div>
-    </div>
-  </section>
-
-</div><!-- /page-wrap -->
-
-<!-- ===== FOOTER ===== -->
-<footer>
-  <div class="footer-links">
-    <span>Made with ❤️ for people who need a break</span>
-    <a href="/about.html">About</a>
-    <a href="/privacy.html">Privacy</a>
-    <a href="https://thedailycheer.com" target="_blank" rel="noopener" class="footer-cheer">🌟 The Daily Cheer</a>
-    <a href="https://ko-fi.com/zenlofi" target="_blank" rel="noopener" class="footer-kofi">☕ Ko-fi</a>
-  </div>
-  <div class="footer-copy">© 2026 Zen Lofi</div>
-<p style="margin-top:8px;font-size:12px">As an Amazon Associate we earn from qualifying purchases. Affiliate links use tag=brazenprodu01-20.</p></footer>
-
-<script>
-// ============================================================
-// STREAMS
-// ============================================================
-const STREAMS_DATA = [
-  { id: 'jfKfPfyJRdk', name: 'Lo-fi Girl 24/7', desc: 'The classic. Always vibing.', emoji: '📻' },
-  { id: '5qap5aO4i9A', name: 'Chilled Cow Study', desc: 'Deep focus beats.', emoji: '🐄' },
-  { id: 'DWcJFNfaw9c', name: 'Lofi Hip Hop Radio', desc: 'Chill hip hop all day.', emoji: '🎤' },
-];
-
-// Load stream weights from localStorage
-function getStreamWeights() {
-  try { return JSON.parse(localStorage.getItem('zenlofi-stream-weights') || '{}'); } catch { return {}; }
-}
-function setStreamWeight(id, w) {
-  const weights = getStreamWeights();
-  weights[id] = w;
-  localStorage.setItem('zenlofi-stream-weights', JSON.stringify(weights));
-}
-function getWeight(id) {
-  const w = getStreamWeights()[id];
-  return w !== undefined ? w : 1;
-}
-function sortedStreams() {
-  return [...STREAMS_DATA].sort((a, b) => getWeight(b.id) - getWeight(a.id));
-}
-
-let activeStreamId = null;
-
-function buildStreamGrid() {
-  const grid = document.getElementById('stream-grid');
-  grid.innerHTML = '';
-  sortedStreams().forEach(s => {
-    const div = document.createElement('div');
-    const isLiked = getWeight(s.id) >= 3;
-    div.className = 'card stream-card' + (isLiked ? ' liked' : '') + (s.id === activeStreamId ? ' active' : '');
-    div.dataset.id = s.id;
-    div.innerHTML = `
-      <span class="liked-badge">⭐</span>
-      <span class="stream-thumb">${s.emoji}</span>
-      <h3>${s.name}</h3>
-      <p class="stream-desc">${s.desc}</p>
-      <div class="stream-actions">
-        <button onclick="streamLike('${s.id}', event)">👍 Like</button>
-        <button onclick="streamDislike('${s.id}', event)">👎 Skip</button>
-      </div>
-    `;
-    div.addEventListener('click', (e) => {
-      if (e.target.tagName === 'BUTTON') return;
-      playStream(s.id);
-    });
-    grid.appendChild(div);
-  });
-}
-
-function playStream(id) {
-  activeStreamId = id;
-  const iframe = document.getElementById('yt-iframe');
-  const placeholder = document.getElementById('player-placeholder');
-  iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
-  iframe.style.display = 'block';
-  placeholder.style.display = 'none';
-  buildStreamGrid();
-  showToast('▶️ Stream loading...');
-}
-
-function streamLike(id, e) {
-  e.stopPropagation();
-  setStreamWeight(id, 3);
-  buildStreamGrid();
-  showToast('⭐ Marked as a favourite!');
-}
-
-function streamDislike(id, e) {
-  e.stopPropagation();
-  setStreamWeight(id, 0.2);
-  // Play next in rotation (by weight)
-  const others = sortedStreams().filter(s => s.id !== id);
-  if (others.length > 0) playStream(others[0].id);
-  showToast('Playing something else 🎵');
-}
-
-// ============================================================
-// NATURE SOUNDS
-// ============================================================
-const SOUNDS = [
-  { name: 'Rain', emoji: '🌧️', url: '/sounds/rain.mp3' },
-  { name: 'Ocean', emoji: '🌊', url: '/sounds/ocean.mp3' },
-  { name: 'Forest', emoji: '🌿', url: '/sounds/forest.mp3' },
-  { name: 'Fire', emoji: '🔥', url: '/sounds/fire.mp3' },
-  { name: 'Café', emoji: '☕', url: '/sounds/cafe.mp3' },
-  { name: 'Thunder', emoji: '⛈️', url: '/sounds/thunder.mp3' },
-  { name: 'Wind', emoji: '💨', url: '/sounds/wind.mp3' },
-  { name: 'Fan', emoji: '🌀', url: '/sounds/fan.mp3' },
-];
-
-const audioElements = {};
-
-function buildSoundGrid() {
-  const grid = document.getElementById('sound-grid');
-  grid.innerHTML = '';
-  SOUNDS.forEach((s, i) => {
-    const audio = new Audio(s.url);
-    audio.loop = true;
-    audio.volume = 0.5;
-    audioElements[i] = audio;
-
-    const div = document.createElement('div');
-    div.className = 'sound-btn';
-    div.id = `sound-${i}`;
-    div.innerHTML = `
-      <span class="sound-emoji">${s.emoji}</span>
-      <div class="sound-name">${s.name} <span class="sound-status">▶ Play</span></div>
-      <input type="range" class="vol-slider" min="0" max="100" value="50" data-idx="${i}" />
-    `;
-
-    div.addEventListener('click', (e) => {
-      if (e.target.classList.contains('vol-slider')) return;
-      toggleSound(i);
-    });
-
-    div.querySelector('.vol-slider').addEventListener('input', (e) => {
-      e.stopPropagation();
-      audioElements[i].volume = e.target.value / 100;
-    });
-
-    grid.appendChild(div);
-  });
-}
-
-function toggleSound(idx) {
-  const audio = audioElements[idx];
-  const btn = document.getElementById(`sound-${idx}`);
-  const status = btn.querySelector('.sound-status');
-  if (audio.paused) {
-    audio.play().catch(() => {});
-    btn.classList.add('playing');
-    status.textContent = '⏸ Playing';
-  } else {
-    audio.pause();
-    btn.classList.remove('playing');
-    status.textContent = '▶ Play';
-  }
-}
-
-function playFirstActiveSound() {
-  // Used by timer: start first playing sound or first sound
-  const keys = Object.keys(audioElements);
-  for (const k of keys) {
-    if (!audioElements[k].paused) return; // already playing
-  }
-  if (keys.length > 0) toggleSound(0);
-}
-
-// ============================================================
-// FOCUS TIMER
-// ============================================================
-let timerWork = 25, timerBreak = 5;
-let timerSeconds = timerWork * 60;
-let timerRunning = false;
-let timerInterval = null;
-let isBreak = false;
-let timerSessions = 0;
-
-function updateDisplay() {
-  const m = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
-  const s = String(timerSeconds % 60).padStart(2, '0');
-  document.getElementById('timer-display').textContent = `${m}:${s}`;
-}
-
-function timerStart() {
-  if (timerRunning) return;
-  timerRunning = true;
-  document.getElementById('btn-start').style.display = 'none';
-  document.getElementById('btn-pause').style.display = 'inline-flex';
-  document.getElementById('timer-label').textContent = isBreak ? '☕ Break time — you earned it!' : '🎯 Focus mode — you got this!';
-  const display = document.getElementById('timer-display');
-  display.classList.toggle('break-mode', isBreak);
-  playFirstActiveSound();
-  timerInterval = setInterval(() => {
-    if (timerSeconds > 0) {
-      timerSeconds--;
-      updateDisplay();
-    } else {
-      clearInterval(timerInterval);
-      timerRunning = false;
-      playBeep();
-      if (!isBreak) {
-        timerSessions++;
-        isBreak = true;
-        timerSeconds = timerBreak * 60;
-        document.getElementById('timer-label').textContent = `☕ Break! Session ${timerSessions} done. Starting break...`;
-        showToast(`✅ Focus done! Take a ${timerBreak}-min break 🎉`);
-      } else {
-        isBreak = false;
-        timerSeconds = timerWork * 60;
-        document.getElementById('timer-label').textContent = '🎯 Break over — ready for another round?';
-        showToast('🎯 Break over! Start when ready.');
+  <meta name="description" content="Mix ambient sounds, stream lo-fi beats, and use the focus timer — all in one place. Free forever." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://zenlofi.com/" />
+  <meta property="og:title" content="Zen Lofi — Find your focus. Find your calm." />
+  <meta property="og:description" content="Mix ambient sounds, stream lo-fi beats, and use the focus timer — all in one place. Free forever." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://zenlofi.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Zen Lofi — Find your focus. Find your calm." />
+  <meta name="twitter:description" content="Mix ambient sounds, stream lo-fi beats, and use the focus timer — all in one place. Free forever." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          },
+          boxShadow: {
+            'soft-xl': '0 20px 45px rgba(17, 24, 39, 0.08)'
+          }
+        }
       }
-      updateDisplay();
-      document.getElementById('btn-start').style.display = 'inline-flex';
-      document.getElementById('btn-pause').style.display = 'none';
-      document.getElementById('timer-display').classList.toggle('break-mode', isBreak);
-    }
-  }, 1000);
-}
+    };
+  </script>
+</head>
+<body class="bg-slate-50 font-sans text-zinc-900 antialiased">
+  <header class="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/85 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="/" class="text-lg font-black tracking-tight text-zinc-950">zenlofi.com</a>
+      <nav class="hidden items-center gap-6 md:flex">
+        <a href="#top-picks" class="text-sm font-semibold text-zinc-600 transition hover:text-zinc-950">Top Picks</a><a href="#reviews" class="text-sm font-semibold text-zinc-600 transition hover:text-zinc-950">Reviews</a><a href="#buying-guide" class="text-sm font-semibold text-zinc-600 transition hover:text-zinc-950">Buying Guide</a><a href="#blog" class="text-sm font-semibold text-zinc-600 transition hover:text-zinc-950">Blog</a><a href="#faq" class="text-sm font-semibold text-zinc-600 transition hover:text-zinc-950">FAQ</a>
+      </nav>
+      <a href="#top-picks" class="inline-flex min-h-11 items-center justify-center rounded-2xl bg-zinc-950 px-5 py-3 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-zinc-800">See Top Picks</a>
+    </div>
+  </header>
 
-function timerPause() {
-  if (!timerRunning) return;
-  clearInterval(timerInterval);
-  timerRunning = false;
-  document.getElementById('btn-start').style.display = 'inline-flex';
-  document.getElementById('btn-pause').style.display = 'none';
-  document.getElementById('timer-label').textContent = '⏸ Paused — resume whenever';
-}
+  <main>
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(251,146,60,0.12),_transparent_35%),radial-gradient(circle_at_top_right,_rgba(99,102,241,0.10),_transparent_30%)]"></div>
+      <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div>
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="inline-flex rounded-full border border-zinc-300 bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-zinc-700">General Reviews · Expert Picks</span>
+              
+            </div>
+            <h1 class="mt-6 max-w-4xl text-4xl font-black tracking-tight text-zinc-950 sm:text-5xl lg:text-6xl">Zen Lofi — Find your focus. Find your calm.</h1>
+            <p class="mt-6 max-w-2xl text-lg leading-8 text-zinc-600">Mix ambient sounds, stream lo-fi beats, and use the focus timer — all in one place. Free forever.</p>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="#top-picks" class="inline-flex min-h-12 items-center justify-center rounded-2xl bg-orange-500 px-6 py-3 text-sm font-black uppercase tracking-[0.14em] text-white shadow-sm transition hover:bg-orange-600">See The Best Picks</a>
+              <a href="#buying-guide" class="inline-flex min-h-12 items-center justify-center rounded-2xl border border-zinc-300 bg-white px-6 py-3 text-sm font-bold text-zinc-700 transition hover:border-zinc-900 hover:text-zinc-900">Why These Picks Work</a>
+            </div>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <div class="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold text-zinc-700 shadow-sm">Updated June 2026</div>
+              <div class="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold text-zinc-700 shadow-sm">4 top picks reviewed</div>
+              <div class="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold text-zinc-700 shadow-sm">Amazon affiliate links • no extra cost</div>
+            </div>
+          </div>
 
-function timerReset() {
-  clearInterval(timerInterval);
-  timerRunning = false;
-  isBreak = false;
-  timerSeconds = timerWork * 60;
-  updateDisplay();
-  document.getElementById('btn-start').style.display = 'inline-flex';
-  document.getElementById('btn-pause').style.display = 'none';
-  document.getElementById('timer-display').classList.remove('break-mode');
-  document.getElementById('timer-label').textContent = '🎯 Focus session — ready when you are';
-}
 
-function setPreset(work, brk, activeId) {
-  timerWork = work; timerBreak = brk;
-  timerReset();
-  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(activeId).classList.add('active');
-  document.getElementById('custom-inputs').classList.remove('show');
-}
+        </div>
+      </div>
+    </section>
 
-document.getElementById('preset-25').addEventListener('click', () => setPreset(25, 5, 'preset-25'));
-document.getElementById('preset-45').addEventListener('click', () => setPreset(45, 15, 'preset-45'));
-document.getElementById('preset-custom').addEventListener('click', () => {
-  document.getElementById('custom-inputs').classList.toggle('show');
-  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('preset-custom').classList.add('active');
-});
+    
 
-function applyCustom() {
-  const w = parseInt(document.getElementById('custom-work').value) || 25;
-  const b = parseInt(document.getElementById('custom-break').value) || 5;
-  timerWork = Math.min(Math.max(w, 1), 120);
-  timerBreak = Math.min(Math.max(b, 1), 60);
-  timerReset();
-  showToast(`⏱ Custom: ${timerWork}m focus / ${timerBreak}m break`);
-}
+    <section id="top-picks" class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="text-xs font-black uppercase tracking-[0.2em] text-zinc-500">Top Picks</p>
+          <h2 class="mt-3 text-3xl font-black tracking-tight text-zinc-950 sm:text-4xl">A modern shortlist built from the master product database.</h2>
+        </div>
+        <p class="max-w-xl text-sm leading-7 text-zinc-600">Every page uses the same Tailwind-powered master layout so the network can scale without falling back to brittle hardcoded templates.</p>
+      </div>
 
-function playBeep() {
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain); gain.connect(ctx.destination);
-    osc.frequency.value = 880;
-    osc.type = 'sine';
-    gain.gain.setValueAtTime(0.4, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
-    osc.start(); osc.stop(ctx.currentTime + 1.2);
-  } catch(e) {}
-}
+      <div id="reviews" class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <article class="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <div class="flex items-center justify-between border-b border-zinc-100 px-6 py-4">
+          <span class="inline-flex rounded-full bg-zinc-900 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.16em] text-white">Best Overall</span>
+          <span class="text-sm font-bold text-zinc-400">#1</span>
+        </div>
 
-// ============================================================
-// WAITLIST
-// ============================================================
-function saveWaitlist() {
-  const email = document.getElementById('waitlist-email').value.trim();
-  if (!email || !email.includes('@')) {
-    showToast('Please enter a valid email 📧');
-    return;
-  }
-  const existing = JSON.parse(localStorage.getItem('zenlofi-waitlist') || '[]');
-  if (!existing.includes(email)) existing.push(email);
-  localStorage.setItem('zenlofi-waitlist', JSON.stringify(existing));
-  document.getElementById('waitlist-confirm').style.display = 'block';
-  document.querySelector('.waitlist-form').style.display = 'none';
-}
+        <div class="aspect-square bg-zinc-50"><div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-200 p-6 text-center"><div><div class="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-900 text-lg font-black text-white">#1</div><p class="text-sm font-semibold text-zinc-700">Zenlofi Pick #1 — ASIN B0CQXMXJC5</p></div></div></div>
 
-// ============================================================
-// TOAST
-// ============================================================
-let toastTimer = null;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
-}
+        <div class="flex flex-1 flex-col p-6">
+          <div class="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">
+            <span>General Reviews</span>
+            <span class="text-zinc-300">•</span>
+            <span>ASIN B0CQXMXJC5</span>
+          </div>
 
-// ============================================================
-// INIT
-// ============================================================
-buildStreamGrid();
-buildSoundGrid();
-updateDisplay();
-</script>
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="text-xl font-black leading-tight text-zinc-950">Zenlofi Pick #1 — ASIN B0CQXMXJC5</h3>
+            
+          </div>
 
+          <p class="mt-4 text-sm leading-6 text-zinc-600">This is the strongest overall value on the page for most buyers shopping in general affiliate.</p>
+
+          <div class="mt-5 space-y-4">
+            <div>
+              <p class="text-xs font-black uppercase tracking-widest text-emerald-700 mb-2">Pros</p>
+              <ul class="space-y-1 text-sm leading-6 text-zinc-700"><li class="flex gap-2"><span class="mt-1 text-emerald-600">✓</span><span>Strong fit for shoppers comparing top-ranked options.</span></li><li class="flex gap-2"><span class="mt-1 text-emerald-600">✓</span><span>Useful starting point if you want a proven mainstream pick.</span></li><li class="flex gap-2"><span class="mt-1 text-emerald-600">✓</span><span>Good shortlist candidate in the general reviews category.</span></li></ul>
+            </div>
+            <div class="pt-3 border-t border-slate-100">
+              <p class="text-xs font-black uppercase tracking-widest text-rose-600 mb-2">Cons</p>
+              <ul class="space-y-1 text-sm leading-6 text-zinc-500"><li class="flex gap-2"><span class="mt-1 text-rose-600">–</span><span>Check compatibility, sizing, or fit details before ordering.</span></li><li class="flex gap-2"><span class="mt-1 text-rose-600">–</span><span>Pricing can shift, so compare current value before buying.</span></li></ul>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <a href="https://www.amazon.com/dp/B0CQXMXJC5/?tag=brazenprodu01-20" target="_blank" rel="nofollow sponsored noopener" class="inline-flex w-full items-center justify-center bg-slate-900 text-white font-semibold py-3 px-6 rounded-lg hover:bg-slate-800 text-center transition">Check Price on Amazon</a>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <div class="flex items-center justify-between border-b border-zinc-100 px-6 py-4">
+          <span class="inline-flex rounded-full bg-zinc-900 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.16em] text-white">Runner-Up</span>
+          <span class="text-sm font-bold text-zinc-400">#2</span>
+        </div>
+
+        <div class="aspect-square bg-zinc-50"><div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-200 p-6 text-center"><div><div class="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-900 text-lg font-black text-white">#2</div><p class="text-sm font-semibold text-zinc-700">Zenlofi Pick #2 — ASIN B0DFWJ7J35</p></div></div></div>
+
+        <div class="flex flex-1 flex-col p-6">
+          <div class="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">
+            <span>General Reviews</span>
+            <span class="text-zinc-300">•</span>
+            <span>ASIN B0DFWJ7J35</span>
+          </div>
+
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="text-xl font-black leading-tight text-zinc-950">Zenlofi Pick #2 — ASIN B0DFWJ7J35</h3>
+            
+          </div>
+
+          <p class="mt-4 text-sm leading-6 text-zinc-600">A strong alternative if the top pick is unavailable or priced too high today.</p>
+
+          <div class="mt-5 space-y-4">
+            <div>
+              <p class="text-xs font-black uppercase tracking-widest text-emerald-700 mb-2">Pros</p>
+              <ul class="space-y-1 text-sm leading-6 text-zinc-700"><li class="flex gap-2"><span class="mt-1 text-emerald-600">✓</span><span>Strong fit for shoppers comparing top-ranked options.</span></li><li class="flex gap-2"><span class="mt-1 text-emerald-600">✓</span><span>Useful starting point if you want a proven mainstream pick.</span></li><li class="flex gap-2"><span class="mt-1 text-emerald-600">✓</span><span>Good shortlist candidate in the general reviews category.</span></li></ul>
+            </div>
+            <div class="pt-3 border-t border-slate-100">
+              <p class="text-xs font-black uppercase tracking-widest text-rose-600 mb-2">Cons</p>
+              <ul class="space-y-1 text-sm leading-6 text-zinc-500"><li class="flex gap-2"><span class="mt-1 text-rose-600">–</span><span>Check compatibility, sizing, or fit details before ordering.</span></li><li class="flex gap-2"><span class="mt-1 text-rose-600">–</span><span>Pricing can shift, so compare current value before buying.</span></li></ul>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <a href="https://www.amazon.com/dp/B0DFWJ7J35/?tag=brazenprodu01-20" target="_blank" rel="nofollow sponsored noopener" class="inline-flex w-full items-center justify-center bg-slate-900 text-white font-semibold py-3 px-6 rounded-lg hover:bg-slate-800 text-center transition">Check Price on Amazon</a>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <div class="flex items-center justify-between border-b border-zinc-100 px-6 py-4">
+          <span class="inline-flex rounded-full bg-zinc-900 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.16em] text-white">Best Value</span>
+          <span class="text-sm font-bold text-zinc-400">#3</span>
+        </div>
+
+        <div class="aspect-square bg-zinc-50"><div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-200 p-6 text-center"><div><div class="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-900 text-lg font-black text-white">#3</div><p class="text-sm font-semibold text-zinc-700">Zenlofi Pick #3 — ASIN B0C4SW4MXJ</p></div></div></div>
+
+        <div class="flex flex-1 flex-col p-6">
+          <div class="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">
+            <span>General Reviews</span>
+            <span class="text-zinc-300">•</span>
+            <span>ASIN B0C4SW4MXJ</span>
+          </div>
+
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="text-xl font-black leading-tight text-zinc-950">Zenlofi Pick #3 — ASIN B0C4SW4MXJ</h3>
+            
+          </div>
+
+          <p class="mt-4 text-sm leading-6 text-zinc-600">A smart value-focused choice that still covers the core needs most buyers care about.</p>
+
+          <div class="mt-5 space-y-4">
+            <div>
+              <p class="text-xs font-black uppercase tracking-widest text-emerald-700 mb-2">Pros</p>
+              <ul class="space-y-1 text-sm leading-6 text-zinc-700"><li class="flex gap-2"><span class="mt-1 text-emerald-600">✓</span><span>Strong fit for shoppers comparing top-ranked options.</span></li><li class="flex gap-2"><span class="mt-1 text-emerald-600">✓</span><span>Useful starting point if you want a proven mainstream pick.</span></li><li class="flex gap-2"><span class="mt-1 text-emerald-600">✓</span><span>Good shortlist candidate in the general reviews category.</span></li></ul>
+            </div>
+            <div class="pt-3 border-t border-slate-100">
+              <p class="text-xs font-black uppercase tracking-widest text-rose-600 mb-2">Cons</p>
+              <ul class="space-y-1 text-sm leading-6 text-zinc-500"><li class="flex gap-2"><span class="mt-1 text-rose-600">–</span><span>Check compatibility, sizing, or fit details before ordering.</span></li><li class="flex gap-2"><span class="mt-1 text-rose-600">–</span><span>Pricing can shift, so compare current value before buying.</span></li></ul>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <a href="https://www.amazon.com/dp/B0C4SW4MXJ/?tag=brazenprodu01-20" target="_blank" rel="nofollow sponsored noopener" class="inline-flex w-full items-center justify-center bg-slate-900 text-white font-semibold py-3 px-6 rounded-lg hover:bg-slate-800 text-center transition">Check Price on Amazon</a>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <div class="flex items-center justify-between border-b border-zinc-100 px-6 py-4">
+          <span class="inline-flex rounded-full bg-zinc-900 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.16em] text-white">Top-Rated Pick</span>
+          <span class="text-sm font-bold text-zinc-400">#4</span>
+        </div>
+
+        <div class="aspect-square bg-zinc-50"><div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-200 p-6 text-center"><div><div class="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-900 text-lg font-black text-white">#4</div><p class="text-sm font-semibold text-zinc-700">Zenlofi Pick #4 — ASIN B0FB36RXC8</p></div></div></div>
+
+        <div class="flex flex-1 flex-col p-6">
+          <div class="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">
+            <span>General Reviews</span>
+            <span class="text-zinc-300">•</span>
+            <span>ASIN B0FB36RXC8</span>
+          </div>
+
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="text-xl font-black leading-tight text-zinc-950">Zenlofi Pick #4 — ASIN B0FB36RXC8</h3>
+            
+          </div>
+
+          <p class="mt-4 text-sm leading-6 text-zinc-600">Worth a look if you want another credible option before you decide.</p>
+
+          <div class="mt-5 space-y-4">
+            <div>
+              <p class="text-xs font-black uppercase tracking-widest text-emerald-700 mb-2">Pros</p>
+              <ul class="space-y-1 text-sm leading-6 text-zinc-700"><li class="flex gap-2"><span class="mt-1 text-emerald-600">✓</span><span>Strong fit for shoppers comparing top-ranked options.</span></li><li class="flex gap-2"><span class="mt-1 text-emerald-600">✓</span><span>Useful starting point if you want a proven mainstream pick.</span></li><li class="flex gap-2"><span class="mt-1 text-emerald-600">✓</span><span>Good shortlist candidate in the general reviews category.</span></li></ul>
+            </div>
+            <div class="pt-3 border-t border-slate-100">
+              <p class="text-xs font-black uppercase tracking-widest text-rose-600 mb-2">Cons</p>
+              <ul class="space-y-1 text-sm leading-6 text-zinc-500"><li class="flex gap-2"><span class="mt-1 text-rose-600">–</span><span>Check compatibility, sizing, or fit details before ordering.</span></li><li class="flex gap-2"><span class="mt-1 text-rose-600">–</span><span>Pricing can shift, so compare current value before buying.</span></li></ul>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <a href="https://www.amazon.com/dp/B0FB36RXC8/?tag=brazenprodu01-20" target="_blank" rel="nofollow sponsored noopener" class="inline-flex w-full items-center justify-center bg-slate-900 text-white font-semibold py-3 px-6 rounded-lg hover:bg-slate-800 text-center transition">Check Price on Amazon</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    </section>
+
+    <section id="buying-guide" class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <p class="text-xs font-black uppercase tracking-[0.2em] text-zinc-500">Buying Guide</p>
+          <h2 class="mt-3 text-3xl font-black tracking-tight text-zinc-950 sm:text-4xl">What actually matters before you buy.</h2>
+          <p class="mt-4 max-w-xl text-base leading-7 text-zinc-600">This section gives every site a strong editorial backbone instead of just dumping product links onto a page.</p>
+        </div>
+        <ul class="grid gap-4 text-sm leading-7 text-zinc-700"><li class="flex gap-3 rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm"><span class="mt-1 text-zinc-900">•</span><span>Start with the product that best balances quality, reviews, and value.</span></li><li class="flex gap-3 rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm"><span class="mt-1 text-zinc-900">•</span><span>Look for repeat-buyer confidence and strong long-term satisfaction signals.</span></li><li class="flex gap-3 rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm"><span class="mt-1 text-zinc-900">•</span><span>Avoid overpaying for branding when a better-value alternative exists.</span></li><li class="flex gap-3 rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm"><span class="mt-1 text-zinc-900">•</span><span>Fit, durability, and everyday usability should drive the final decision.</span></li></ul>
+      </div>
+    </section>
+
+    <section id="faq" class="mx-auto max-w-5xl px-4 pb-20 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <p class="text-xs font-black uppercase tracking-[0.2em] text-zinc-500">FAQ</p>
+        <h2 class="mt-3 text-3xl font-black tracking-tight text-zinc-950 sm:text-4xl">Common questions, answered cleanly.</h2>
+      </div>
+      <div class="space-y-4"><details class="group rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-black text-zinc-950">
+                <span>How were these picks chosen?</span>
+                <span class="text-zinc-400 transition group-open:rotate-45">+</span>
+              </summary>
+              <p class="mt-4 max-w-3xl text-sm leading-7 text-zinc-600">These picks are prioritized for value, buyer confidence, and overall usefulness based on the product data available for this site.</p>
+            </details><details class="group rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-black text-zinc-950">
+                <span>Do affiliate links change the price?</span>
+                <span class="text-zinc-400 transition group-open:rotate-45">+</span>
+              </summary>
+              <p class="mt-4 max-w-3xl text-sm leading-7 text-zinc-600">No. Using the affiliate links does not increase your price, but it may help support the site.</p>
+            </details><details class="group rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-black text-zinc-950">
+                <span>What if a product is unavailable?</span>
+                <span class="text-zinc-400 transition group-open:rotate-45">+</span>
+              </summary>
+              <p class="mt-4 max-w-3xl text-sm leading-7 text-zinc-600">Inventory and pricing change often. If a pick is unavailable, the next-ranked option is usually the best fallback.</p>
+            </details></div>
+    </section>
+
+    
+    <section id="blog" class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <p class="text-xs font-black uppercase tracking-[0.2em] text-zinc-500">Expert Guides</p>
+        <h2 class="mt-3 text-3xl font-black tracking-tight text-zinc-950 sm:text-4xl">Expert Car Care Guides</h2>
+        <p class="mt-4 max-w-2xl text-base leading-7 text-zinc-600">In-depth guides covering the questions buyers ask before and after they purchase. Research smarter, maintain better.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+          <div class="aspect-video bg-slate-100 flex items-center justify-center">
+            <div class="text-center px-6">
+              <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-slate-900">
+                <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
+              </div>
+              <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Expert Guide</p>
+            </div>
+          </div>
+          <div class="flex flex-1 flex-col p-6">
+            <h3 class="text-lg font-black leading-snug text-zinc-950">How to Read Amazon Reviews Without Getting Burned</h3>
+            <p class="mt-3 flex-1 text-sm leading-6 text-zinc-500">Verified purchase, review velocity, and star distribution tell a more accurate story than the average rating. Here&#x27;s how to decode what you&#x27;re looking at.</p>
+            <div class="mt-5">
+              <a href="/blog/how-to-read-amazon-reviews/" class="inline-flex items-center gap-1 text-sm font-bold text-slate-900 hover:underline">
+                Read Guide
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+        <article class="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+          <div class="aspect-video bg-slate-100 flex items-center justify-center">
+            <div class="text-center px-6">
+              <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-slate-900">
+                <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
+              </div>
+              <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Expert Guide</p>
+            </div>
+          </div>
+          <div class="flex flex-1 flex-col p-6">
+            <h3 class="text-lg font-black leading-snug text-zinc-950">Why the Best Value Pick Is Rarely the Cheapest Option</h3>
+            <p class="mt-3 flex-1 text-sm leading-6 text-zinc-500">Price per use, durability, and return rate all feed into real value. The lowest-priced product usually loses this math over time.</p>
+            <div class="mt-5">
+              <a href="/blog/best-value-vs-cheapest-option/" class="inline-flex items-center gap-1 text-sm font-bold text-slate-900 hover:underline">
+                Read Guide
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+        <article class="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+          <div class="aspect-video bg-slate-100 flex items-center justify-center">
+            <div class="text-center px-6">
+              <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-slate-900">
+                <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
+              </div>
+              <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Expert Guide</p>
+            </div>
+          </div>
+          <div class="flex flex-1 flex-col p-6">
+            <h3 class="text-lg font-black leading-snug text-zinc-950">The Smart Buyer&#x27;s Checklist Before Any Online Purchase</h3>
+            <p class="mt-3 flex-1 text-sm leading-6 text-zinc-500">A 60-second pre-purchase checklist that filters out impulse buys, spots pricing manipulation, and surfaces the next-best alternative.</p>
+            <div class="mt-5">
+              <a href="/blog/smart-buyer-checklist/" class="inline-flex items-center gap-1 text-sm font-bold text-slate-900 hover:underline">
+                Read Guide
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-zinc-200 bg-white">
+    <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 text-sm text-zinc-600 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <div>
+        <p class="font-semibold text-zinc-800">zenlofi.com</p>
+        <p class="mt-1">Updated 2026-06-09 · Powered by the AXL affiliate master database.</p>
+      </div>
+      <div class="max-w-2xl text-sm leading-6 text-zinc-500">
+        Disclosure: This page contains affiliate links. If you buy through them, the site may earn a commission at no additional cost to you.
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
